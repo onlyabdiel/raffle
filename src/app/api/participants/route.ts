@@ -7,7 +7,7 @@ export async function GET() {
       orderBy: { name: 'asc' }
     })
     return NextResponse.json(participants)
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: 'Failed to fetch participants' },
       { status: 500 }
@@ -47,7 +47,7 @@ export async function POST(request: NextRequest) {
     })
 
     return NextResponse.json(participant, { status: 201 })
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: 'Failed to create participant' },
       { status: 500 }
@@ -72,7 +72,7 @@ export async function DELETE(request: NextRequest) {
     })
 
     return NextResponse.json({ success: true })
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: 'Failed to delete participant' },
       { status: 500 }

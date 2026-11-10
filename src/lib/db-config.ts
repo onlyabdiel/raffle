@@ -1,4 +1,4 @@
-import { Pool } from 'pg'
+import { Pool, PoolConfig } from 'pg'
 import fs from 'fs'
 import path from 'path'
 
@@ -14,7 +14,7 @@ export function createDatabasePool(connectionString: string = process.env.DATABA
   const isRDS = connectionString.includes('rds.amazonaws.com')
   const isAiven = connectionString.includes('aivencloud.com')
 
-  let sslConfig: any = false
+  let sslConfig: PoolConfig['ssl'] = false
 
   if (isRDS) {
     sslConfig = {

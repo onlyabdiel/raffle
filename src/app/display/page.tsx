@@ -4,6 +4,35 @@ import { useEffect, useState, useRef } from 'react'
 import { getSocket, RaffleState } from '@/lib/socket'
 import confetti from 'canvas-confetti'
 
+const triggerConfetti = () => {
+  const duration = 3000
+  const end = Date.now() + duration
+
+  const frame = () => {
+    // Christmas colors: red, green, gold, white
+    confetti({
+      particleCount: 4,
+      angle: 60,
+      spread: 55,
+      origin: { x: 0 },
+      colors: ['#dc2626', '#16a34a', '#fbbf24', '#ffffff', '#b91c1c']
+    })
+    confetti({
+      particleCount: 4,
+      angle: 120,
+      spread: 55,
+      origin: { x: 1 },
+      colors: ['#dc2626', '#16a34a', '#fbbf24', '#ffffff', '#b91c1c']
+    })
+
+    if (Date.now() < end) {
+      requestAnimationFrame(frame)
+    }
+  }
+
+  frame()
+}
+
 export default function DisplayPage() {
   const [state, setState] = useState<RaffleState | null>(null)
   const [showWinner, setShowWinner] = useState(false)
@@ -44,35 +73,6 @@ export default function DisplayPage() {
       socket.off('sync-state')
     }
   }, [])
-
-  const triggerConfetti = () => {
-    const duration = 3000
-    const end = Date.now() + duration
-
-    const frame = () => {
-      // Christmas colors: red, green, gold, white
-      confetti({
-        particleCount: 4,
-        angle: 60,
-        spread: 55,
-        origin: { x: 0 },
-        colors: ['#dc2626', '#16a34a', '#fbbf24', '#ffffff', '#b91c1c']
-      })
-      confetti({
-        particleCount: 4,
-        angle: 120,
-        spread: 55,
-        origin: { x: 1 },
-        colors: ['#dc2626', '#16a34a', '#fbbf24', '#ffffff', '#b91c1c']
-      })
-
-      if (Date.now() < end) {
-        requestAnimationFrame(frame)
-      }
-    }
-
-    frame()
-  }
 
   if (!state) {
     return (

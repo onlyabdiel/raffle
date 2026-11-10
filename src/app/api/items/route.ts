@@ -8,7 +8,7 @@ export async function GET() {
       orderBy: { order: 'asc' }
     })
     return NextResponse.json(items)
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: 'Failed to fetch items' },
       { status: 500 }
@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
     })
 
     return NextResponse.json(item, { status: 201 })
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: 'Failed to create item' },
       { status: 500 }
@@ -71,7 +71,7 @@ export async function DELETE(request: NextRequest) {
     })
 
     return NextResponse.json({ success: true })
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: 'Failed to delete item' },
       { status: 500 }

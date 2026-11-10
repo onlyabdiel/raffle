@@ -27,7 +27,7 @@ export async function GET() {
         'Content-Disposition': `attachment; filename="raffle-results-${Date.now()}.csv"`
       }
     })
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: 'Failed to export results' },
       { status: 500 }

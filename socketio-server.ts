@@ -150,7 +150,7 @@ async function recordWinner(itemName: string, winnerName: string) {
   })
 
   // Update raffle state to point to new item
-  let raffleState = await prisma.raffleState.findFirst()
+  const raffleState = await prisma.raffleState.findFirst()
   if (raffleState) {
     await prisma.raffleState.update({
       where: { id: raffleState.id },
